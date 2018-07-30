@@ -48,8 +48,4 @@ public class CSVFileReader {
         return bank.getName();
     }
 
-    public static void main(String[] args) throws IOException, SQLException {
-        //importDataFromCSV("sample.csv");
-        System.out.println(readDataFromDB("10040000"));
-    }
 }

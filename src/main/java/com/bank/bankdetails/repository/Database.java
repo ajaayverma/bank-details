@@ -1,24 +1,46 @@
 package com.bank.bankdetails.repository;
 
 import com.bank.bankdetails.model.Bank;
+import com.bank.bankdetails.util.Constants;
+import com.bank.bankdetails.util.PropertyUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by Ajay on 7/27/2018.
  */
 public class Database {
-    private final static String url = "jdbc:postgresql://127.0.0.1/bankdb";
-    private final static String user = "postgres";
-    private final static String password = "root";
+    //private final static String url = "jdbc:postgresql://127.0.0.1/bankdb";
+    private final static String SLASH = "/";
+    private static String DB_USER = null;
+    private static String DB_PASSWORD = null;
+    private static String DB_HOSTNAME = null;
+    private static String DB_DRIVER = null;
+    private static String DB_NAME = null;
+
+
     private static Connection conn = null;
 
-    public static Connection getConnection() {
+    private static void setVariables() throws Exception {
+        final Properties properties = PropertyUtil.setProperties(Constants.RESOURCES_PATH + Constants.DB_VAR_PROPERTIES);
+        DB_USER = PropertyUtil.getPropertyValue(properties, "DB_USER");
+        DB_PASSWORD = PropertyUtil.getPropertyValue(properties, "DB_PASSWORD");
+        DB_HOSTNAME = PropertyUtil.getPropertyValue(properties, "DB_HOSTNAME");
+        DB_DRIVER = PropertyUtil.getPropertyValue(properties, "DB_DRIVER");
+        DB_NAME = PropertyUtil.getPropertyValue(properties, "DB_NAME");
+    }
 
+    public static Connection getConnection() throws Exception {
+        setVariables();
         try {
             if (conn == null) {
-                conn = DriverManager.getConnection(url, user, password);
-                System.out.println("Connected to the PostgreSQL server successfully.");
+                conn = DriverManager.getConnection(DB_DRIVER + SLASH + SLASH + DB_HOSTNAME + SLASH + DB_NAME, DB_USER, DB_PASSWORD);
+                System.out.println("Connected to the DB server successfully.");
             }
 
         } catch (SQLException e) {
@@ -38,7 +60,7 @@ public class Database {
 
             preparedStatement.execute();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -60,7 +82,7 @@ public class Database {
             resultSet.close();
             preparedStatement.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return bank;
