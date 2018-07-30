@@ -51,7 +51,7 @@ public class Database {
     }
 
     public static void save(Bank bank) {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement("insert into bank values (?,?,?,?,?)")) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement("INSERT INTO bank VALUES (?,?,?,?,?)")) {
             preparedStatement.setString(1, bank.getName());
             preparedStatement.setString(2, bank.getPostBank());
             preparedStatement.setString(3, bank.getEuroCity());
@@ -69,7 +69,7 @@ public class Database {
         ResultSet resultSet;
         Bank bank = null;
         try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from bank where commerzbank = ? ");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM bank WHERE commerzbank = ? ");
             preparedStatement.setString(1, bankIdentifier);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

@@ -26,13 +26,13 @@ public class PropertyUtil {
     }
 
     public static String getPropertyValue(Properties prop, String key) throws Exception {
-        if (prop.containsKey(key)){
+        if (prop.containsKey(key)) {
             if (prop.getProperty(key).isEmpty()) {
                 throw new Exception("Property (" + key + ") is empty");
-            }else{
+            } else {
                 return prop.getProperty(key).trim();
             }
-        } else{
+        } else {
             throw new Exception("Property (" + key + ") does not exit");
         }
     }
