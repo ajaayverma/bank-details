@@ -28,3 +28,6 @@ A simple JDBC connection with postgresql has been used for connecting and storin
 - Run "_createDatabase.sql_" to create database and table.
 - Edit "_dbconfig.properties_" and add your DB details.
 - Run Main.java
+
+### Technical trade-off
+- We could also use ORM like hibernate for storage and retrieval of data.
