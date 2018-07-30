@@ -1,7 +1,5 @@
 package com.bank.bankdetails;
 
-import com.bank.bankdetails.reader.CSVFileReader;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

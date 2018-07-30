@@ -22,10 +22,9 @@ A simple JDBC connection with postgresql has been used for connecting and storin
 
 *"Insert"* query is run to insert data and *"Select"* query to retrieve data from DB.
 
-##How to run project
+## How to run project
 
 - Create a user "_testUser_" in your postgresql.
 - Run "_createDatabase.sql_" to create database and table.
+- Edit "_dbconfig.properties_" and add your DB details.
 - Run Main.java
-
- 
